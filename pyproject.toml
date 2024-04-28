@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
@@ -32,3 +32,7 @@ Source = "https://github.com/unknown/sphinx-contribs"
 [tool.hatch]
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/sphinx-contribs/_version.py"
+
+# Setup the extension as a hook
+# [tool.hatch.metadata.hooks]
+# sphinx-contribs = "sphinx_contribs.contribs:setup"
