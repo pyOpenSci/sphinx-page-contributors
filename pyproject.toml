@@ -12,7 +12,7 @@ requires-python = ">=3.10"
 license = "MIT"
 keywords = []
 authors = [
-  { name = "Leah Wasser", email = "leah@pyopensci.org" },
+  { name = "pyOpenSci Community", email = "admin@pyopensci.org" },
 ]
 classifiers = [
   "Development Status :: 4 - Beta",

@@ -1,0 +1,59 @@
+# Config for pre-commit CI https://pre-commit.ci/
+# Common tasks
+#
+# - Run on all files:   pre-commit run --all-files
+# - Register git hooks: pre-commit install --install-hooks
+# - Run a specific hook on all files: pre-commit run codespell --all-files
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] Automatic linting and formatting fixes
+  autofix_prs: true
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate hooks"
+  autoupdate_schedule: monthly
+
+# Fix the node version to avoid a GLIBC error
+# ref: https://stackoverflow.com/questions/71939099/bitbucket-pipeline-error-installing-pre-commit-ts-lint/71940852#71940852
+default_language_version:
+  node: 16.14.2
+
+repos:
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.7.1
+    hooks:
+      - id: prettier
+        # Exclude the HTML, since it doesn't understand Jinja2
+        # exclude also the webpack.config.js file has it embed complete url dificult to prettify
+        # exclude the pytest-regressions folder tests/test_ally
+        exclude: .+\.html|webpack\.config\.js|tests/test_a11y/
+
+  - repo: https://github.com/psf/black
+    rev: 22.12.0
+    hooks:
+      - id: black
+
+  # - repo: https://github.com/charliermarsh/ruff-pre-commit
+  #   rev: "v0.0.215"
+  #   hooks:
+  #     - id: ruff
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.3.1
+    hooks:
+      - id: pyupgrade
+        args: [--py37-plus]
+
+  # - repo: https://github.com/Riverside-Healthcare/djLint
+  #   rev: v1.19.7
+  #   hooks:
+  #     - id: djlint-jinja
+  #       types_or: ["html"]
+
+  # - repo: https://github.com/PyCQA/doc8
+  #   rev: v1.1.1
+  #   hooks:
+  #     - id: doc8
+
+  # - repo: "https://github.com/kynan/nbstripout"
+  #   rev: "0.5.0"
+  #   hooks:
+  #     - id: nbstripout
