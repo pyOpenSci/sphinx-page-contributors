@@ -25,5 +25,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 
+# Settings for sphinx-contribs ext
+repo_name = "pyopensci/python-package-guide"
 
 # html_theme_options = {navigation_with_keys: False}

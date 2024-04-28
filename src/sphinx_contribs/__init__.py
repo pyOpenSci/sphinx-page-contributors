@@ -12,6 +12,8 @@ def setup(app: Sphinx):
     app : Sphinx
         _description_
     """
+
+    app.add_config_value("repo_name", "default/repo", "env")
     app.connect("source-read", fetch_unique_committers)
     # app.connect("html-page-context", add_committers_to_context)
     # app.add_config_value("ignore_files", [], "env")

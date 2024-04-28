@@ -28,10 +28,8 @@ from github import Github
 print("Loading contributors extension.")
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-REPO_NAME = "pyopensci/python-package-guide"
 
 github = Github(GITHUB_TOKEN)
-repo = github.get_repo(REPO_NAME)
 
 
 def fetch_unique_committers(app, docname, source):
@@ -61,11 +59,12 @@ def fetch_unique_committers(app, docname, source):
     # if docname in app.config.ignore_files:
     #     return
 
+    repo_name = app.config.repo_name
+    repo = github.get_repo(repo_name)
     file_path = f"{docname}.md"
     print("Fetching committers for:", file_path)
-    unique_committers = get_unique_committers(
-        GITHUB_TOKEN, REPO_NAME, file_path
-    )
+    # Pass GITHUB_TOKEN to this function properly
+    unique_committers = get_unique_committers(GITHUB_TOKEN, repo, file_path)
     print("Committers are", unique_committers)
     # Store committers in the environment to be used later in the build
     if not hasattr(app.env, "committers_data"):
@@ -111,14 +110,11 @@ def add_committers_to_context(app, pagename, templatename, context, doctree):
         metadata or content if needed.
     """
 
-    if (
-        hasattr(app.env, "committers_data")
-        and pagename in app.env.committers_data
-    ):
+    if hasattr(app.env, "committers_data") and pagename in app.env.committers_data:
         context["committers"] = app.env.committers_data[pagename]
 
 
-def get_unique_committers(github_token, repo_name, file_path):
+def get_unique_committers(github_token, repo, file_path):
     commits = repo.get_commits(path=file_path)
     unique_committers = set()
 
