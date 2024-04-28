@@ -3,8 +3,9 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "sphinx-contribs"
-dynamic = ["version"]
+name = "sphinx_contribs"
+version = "0.1"
+#dynamic = ["version"]
 description = 'A package that gets contributors via commits to each page'
 readme = "README.md"
 requires-python = ">=3.10"
@@ -25,13 +26,13 @@ classifiers = [
 dependencies = ["sphinx>=3.0", "pygithub"]
 
 [project.urls]
-Documentation = "https://github.com/unknown/sphinx-contribs#readme"
-Issues = "https://github.com/unknown/sphinx-contribs/issues"
-Source = "https://github.com/unknown/sphinx-contribs"
+Documentation = "https://github.com/pyopensci/sphinx-contribs#readme"
+Issues = "https://github.com/pyopensci/sphinx-contribs/issues"
+Source = "https://github.com/pyopensci/sphinx-page-contribs"
 
-[tool.hatch]
-version.source = "vcs"
-build.hooks.vcs.version-file = "src/sphinx-contribs/_version.py"
+# [tool.hatch]
+# version.source = "vcs"
+# build.hooks.vcs.version-file = "src/sphinx-contribs/_version.py"
 
 # Setup the extension as a hook
 # [tool.hatch.metadata.hooks]

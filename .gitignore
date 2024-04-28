@@ -161,3 +161,4 @@ cython_debug/
 
 .vscode/*
 src/sphinx-contribs/_version.py
+_build/*

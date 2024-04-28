@@ -33,6 +33,10 @@ github = Github(GITHUB_TOKEN)
 repo = github.get_repo(REPO_NAME)
 
 
+def setup(app: Sphinx):
+    app.connect("source-read", get_unique_committers)
+
+
 def list_markdown_files(repo):
     """
     List all Markdown files in the repository.
@@ -85,7 +89,3 @@ people = {}
 for gh_file in md_files:
     print("Processing: ", gh_file)
     people[gh_file] = get_unique_committers(GITHUB_TOKEN, REPO_NAME, gh_file)
-
-
-def setup(app: Sphinx):
-    app.connect("source-read", get_unique_committers)
